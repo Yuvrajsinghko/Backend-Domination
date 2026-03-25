@@ -55,9 +55,13 @@
   <button id="bearerToken" onclick="window.location.href='/bearerToken'">Bearer Token</button>
 
   <div class="response-area">
+    <% if(locals.content){ %>
     <p>
       <%=content%>
     </p>
+    <% }else{ %>
+      <p>No data </p>
+      <% } %>
   </div>
 </body>
 
