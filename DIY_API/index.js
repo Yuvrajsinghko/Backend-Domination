@@ -31,7 +31,20 @@ app.get("/jokes/:id",(req,res)=>{
 });
 
 //3. GET a jokes by filtering on the joke type
+app.get("/filter",(req,res)=>{
+  const typ=req.query.type;
 
+  const filteredJokes=jokes.filter((joke)=>joke.jokeType===typ);
+  if(filteredJokes){
+    res.json(filteredJokes);
+  }else{
+    res.status(404).json({message:"Enter valid type"});
+  }
+  
+
+
+
+})
 //4. POST a new joke
 
 //5. PUT a joke
