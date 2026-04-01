@@ -8,46 +8,54 @@ const masterKey = "4VGP2DN-6EWM4SJ-N6FGRHV-Z3PR3TT";
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //1. GET a random joke
-
-app.get("/random",(req,res)=>{
-  const randomNum = Math.floor(Math.random()*jokes.length)
-  const randomJoke = jokes[randomNum]
-  res.json(randomJoke)
+app.get("/", (req, res) => {
+  res.render("index.ejs");
 });
 
+app.get("/random", (req, res) => {
+  const randomNum = Math.floor(Math.random() * jokes.length);
+  const randomJoke = jokes[randomNum];
+  res.json(randomJoke);
+});
 
 //2. GET a specific joke
 
-app.get("/jokes/:id",(req,res)=>{
+app.get("/jokes/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  const foundJoke =jokes.find((joke)=>joke.id===id); 
-  
-  if(foundJoke){
+  const foundJoke = jokes.find((joke) => joke.id === id);
+
+  if (foundJoke) {
     res.json(foundJoke);
-  }else{
+  } else {
     res.status(404).json({ message: "Joke not found" });
   }
-  
 });
 
 //3. GET a jokes by filtering on the joke type
-app.get("/filter",(req,res)=>{
-  const typ=req.query.type;
+app.get("/filter", (req, res) => {
+  const typ = req.query.type;
 
-  const filteredJokes=jokes.filter((joke)=>joke.jokeType===typ);
-  if(filteredJokes){
+  const filteredJokes = jokes.filter((joke) => joke.jokeType === typ);
+  if (filteredJokes) {
     res.json(filteredJokes);
-  }else{
-    res.status(404).json({message:"Enter valid type"});
+  } else {
+    res.status(404).json({ message: "Enter valid type" });
   }
-  
-
-
-
-})
+});
 //4. POST a new joke
 
+app.post("/jokes", (req, res) => {
+  const newJoke = {
+    id: jokes.length + 1,
+    jokeText: req.body.text,
+    jokeType: req.body.type,
+  };
+  jokes.push(newJoke);
+  res.json(newJoke);
+
+});
 //5. PUT a joke
+
 
 //6. PATCH a joke
 
