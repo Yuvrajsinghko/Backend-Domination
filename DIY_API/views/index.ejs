@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jokes API</title>
+    <style>
+      body {
+        background-color: darkcyan;
+      }
+      form {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      label {
+        font-size: 2vw;
+      }
+      input {
+        padding: 15px 20px;
+        font-size: larger;
+      }
+      textarea {
+        padding: 15px 20px;
+        font-size: larger;
+      }
+      button {
+        margin-top: 10px;
+        padding: 3vh 3vh;
+        border-radius: 20px;
+        font-size: 20px;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/jokes" method="post">
+      <label>Enter Id</label>
+      <input type="number" formaction="/jokes">
+
+      <label>Enter Joke</label>
+      <textarea name="text"></textarea>
+      <label>Enter Type</label>
+      <input type="text" name="type" />
+      <button type="submit">Add Joke</button>
+    </form>
+    <script src="../index.js"></script>
+  </body>
+</html>
