@@ -82,15 +82,25 @@ app.patch("/jokes/:id", (req, res) => {
 });
 
 //7. DELETE Specific joke
-app.delete("/jokes/:id",(req,res)=>{
+app.delete("/jokes/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  const foundJoke = jokes.find((joke)=>joke.id===id);
-  const findIndex  = jokes.findIndex((joke)=>joke.id===id);
-  jokes.splice(findIndex,1);
-  res.status(200).json("Joke Deleted successfully!!")
-
-})
+  const foundJoke = jokes.find((joke) => joke.id === id);
+  const findIndex = jokes.findIndex((joke) => joke.id === id);
+  jokes.splice(findIndex, 1);
+  res.status(200).json("Joke Deleted successfully!!");
+});
 //8. DELETE All jokes
+app.delete("/all", (req, res) => {
+  const userKey = req.query.key;
+  if (userKey === masterKey) {
+    jokes = [];
+    res.sendStatus(200);
+  } else {
+    res
+      .status(404)
+      .json({ error: `You are not authorised to perform this action.` });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Successfully started server on port ${port}.`);
