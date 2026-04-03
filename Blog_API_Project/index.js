@@ -43,15 +43,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //CHALLENGE 1: GET All posts
 
-app.get("/posts",(req,res)=>{
+app.get("/posts", (req, res) => {
   try {
     res.json(posts);
   } catch (error) {
-    res.status(404).json(error.message)    
-  }  
-})
+    res.status(500).json({ error: error.message });
+  }
+});
 
 //CHALLENGE 2: GET a specific post by id
+
+app.get("/posts/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const requiredPost = posts.find((post) => post.id === id);
+  res.json(requiredPost);
+});
 
 //CHALLENGE 3: POST a new post
 
